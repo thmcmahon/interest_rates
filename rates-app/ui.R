@@ -7,9 +7,10 @@ shinyUI(fluidPage(
   titlePanel("Market expectation of RBA cash rate change",
              windowTitle = "RBA cash rate forecast"),
   
-  # Sidebar with a slider input for the number of bins
-  sidebarLayout(
-    sidebarPanel(
+  mainPanel(width = 6,
+    # Graph
+    fluidRow(align="center",
+      plotOutput("distPlot"),
       sliderInput("target_rate",
                   "Interest Rate:",
                   min = 0,
@@ -18,9 +19,8 @@ shinyUI(fluidPage(
                   value = 1.75)
     ),
     
-    # Show a plot of the generated distribution
-    mainPanel(
-      plotOutput("distPlot"),
+    # Explanation
+    fluidRow(
       h2('How does this work?'),
       p('This  interactive graph shows the market\'s expectation of a change 
         in the RBA cash rate. You can adjust the slider to examine the 
@@ -31,6 +31,7 @@ shinyUI(fluidPage(
         it is that the cash rate will increase or decrease.'),
       p('This market provides a helpful alternative to pundits that do not have
         any skin in the game when it comes to their predictions.'),
+      
       h2('How is this calculated?'),
       p('Interest rate futures are quoted as 100 yield, so an RBA cash rate
         of 2% is quoted as 98 (100 - 2 = 98). But examining the price for
@@ -50,18 +51,19 @@ shinyUI(fluidPage(
         'or if you\'re into maths, you can check out the ASX\'s formula at:',
         a(href="http://www.asx.com.au/prices/targetratetracker.htm",
           'ASX Target Rate Tracker.')),
+      
       h2('Feedback'),
       p("If you'd like to provide feedback or have questions, feel free to
         get in touch on twitter",
         a(href="http://twitter.com/thmcmahon", '@thmcmahon.')),
+      
       h2('Acknowledgements'),
       p("I found the following useful in understanding how this all works:"),
       tags$ul(
         tags$li(a(href='http://www.theaustralian.com.au/business/wealth/handy-rate-tracker-ase-30-day-interbank-cash-rate/story-e6frgac6-1225757911860',
-                       'The Australian: Handy Rate Tracker')),
-        tags$li(a(href='http://calebennett.com/', 'calebennett.com'))
-        )
-      
+                  'The Australian: Handy Rate Tracker')),
+        tags$li(a(href='http://calebennett.com/', 'calebennett.com')))
     )
   )
-))
+)
+)

@@ -1,7 +1,4 @@
-setwd("~/projects/interest_rates/rates-app")
 source('02-analysis.R')
-
-library(manipulate)
 
 par.default <- par()
 
